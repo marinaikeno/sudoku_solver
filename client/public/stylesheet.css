@@ -2,7 +2,7 @@ body {
     background-color: rgb(178, 224, 223);
 }
 
-body h1, body p , body h2 {
+body h1, body p , body h2 a {
     font-family: 'Courier New', Courier, monospace;
     color: rgba(92,189,187,1);
     text-align: center;
