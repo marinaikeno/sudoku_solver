@@ -1,0 +1,2 @@
+export const SOLVE_SUDOKU = "SOLVE_SUDOKU";
+export const EMPTY_SUDOKU = "EMPTY_SUDOKU";
