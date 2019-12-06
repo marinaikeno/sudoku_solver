@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { validate } from './validate';
 
 class SudokuForm extends Component {
     state = {
         highlightedRow: null,
         highlightedCol: null,
-        
+        hasError: false,
     };
+    
     renderInput = ({ input, meta, row, col, isSolved, val }) => {
         let className = `cell ${(col + 1) % 3 === 0 && col < 6 ? "br " : ""}${(row + 1) % 3 === 0 && row < 6 ? "bb " : ""}${meta.active ? "current-cell " : ""}${this.state.highlightedRow === row || this.state.highlightedCol === col ? "highlighted-cell" : ""}`;
-        console.log("fasdf")
         if (!meta.active && this.state.highlightedRow === row && this.state.highlightedCol === col) {
             this.setState({ highlightedRow: null, highlightedCol: null });
         }
@@ -42,7 +43,11 @@ class SudokuForm extends Component {
     }
 
     onSubmit = (formValues) => {
-        this.props.onSubmit(formValues);
+        if (!validate(formValues)) {
+            window.alert("The puzzle you entered cannot have the same number in the same row, column or grid");
+        } else {
+            this.props.onSubmit(formValues);
+        }
     }
 
     onReset = (e) => {
